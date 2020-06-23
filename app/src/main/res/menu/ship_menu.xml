@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/shortShip"
+        android:title="ShortShip"/>
+    <item
+        android:id="@+id/mediumShip"
+        android:title="MediumShip">
+        <menu>
+
+            <item
+                android:id="@+id/mdeiumTop"
+                android:title="Top" />
+            <item
+                android:id="@+id/mdeiumRight"
+                android:title="Right" />
+            <item
+                android:id="@+id/mdeiumBottom"
+                android:title="Bottom"></item>
+            <item
+                android:id="@+id/mdeiumLeft"
+                android:title="Left" />
+            <item
+                android:id="@+id/mdeiumAuto"
+                android:title="Auto" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/largeShip"
+        android:title="LargeShip">
+        <menu>
+
+            <item
+                android:id="@+id/largeTop"
+                android:title="Top" />
+            <item
+                android:id="@+id/largeRight"
+                android:title="Right" />
+            <item
+                android:id="@+id/largeBottom"
+                android:title="Bottom"></item>
+            <item
+                android:id="@+id/largeLeft"
+                android:title="Left" />
+            <item
+                android:id="@+id/largeAuto"
+                android:title="Auto" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/extraLargeShip"
+        android:title="ExtraLargeShip">
+        <menu>
+
+            <item
+                android:id="@+id/extraLargeTop"
+                android:title="Top" />
+            <item
+                android:id="@+id/extraLargeRight"
+                android:title="Right" />
+            <item
+                android:id="@+id/extraLargeBottom"
+                android:title="Bottom"></item>
+            <item
+                android:id="@+id/extraLargeLeft"
+                android:title="Left" />
+            <item
+                android:id="@+id/extraLargeAuto"
+                android:title="Auto" />
+        </menu>
+    </item>
+
+
+</menu>
