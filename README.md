@@ -1,2 +1,2 @@
 # BattleShip
-A mobile ButtleShip Game
+A mobile BattleShip Game
