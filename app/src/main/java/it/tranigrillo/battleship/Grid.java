@@ -218,7 +218,7 @@ public class Grid implements View.OnClickListener, View.OnLongClickListener {
     private void notifyDataSetChanged() {
         for ( SquareCardView box : boxes) {
             if (box.status.equals(BoxStatus.SHIP_VISIBLE)) box.showShip(box.orientation);
-            if (deploy && matrix.getElement(Objects.requireNonNull(mapCardToIndex.get(box))[0], Objects.requireNonNull(mapCardToIndex.get(box))[1]) == 0) {
+            if (deploy && matrix.getElement(Objects.requireNonNull(mapCardToIndex.get(box))[0], Objects.requireNonNull(mapCardToIndex.get(box))[1]) == MatrixStatus.NONE) {
                 box.setNull();
             }
             if (box.status.equals(BoxStatus.SHIP_SINK)) box.setSink(box.orientation);

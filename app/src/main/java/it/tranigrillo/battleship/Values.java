@@ -32,3 +32,10 @@ enum BoxStatus {
     MISSED,
     SHIP_SINK;
 }
+
+enum MatrixStatus {
+    NONE,
+    MISS,
+    HIT,
+    SHIP;
+}

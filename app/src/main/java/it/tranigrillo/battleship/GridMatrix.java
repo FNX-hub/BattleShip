@@ -10,15 +10,15 @@ import java.util.List;
 
 class GridMatrix {
     private final Context context;
-    private Integer[][] element;
+    private MatrixStatus[][] matrix;
     private ArrayList<Ship> fleet = new ArrayList<>();
 
     GridMatrix(Context context, int dim) {
         this.context = context;
-        element = new Integer[dim][dim];
+        matrix = new MatrixStatus[dim][dim];
         for (int i = 0; i < dim; i++) {
              for (int j = 0; j < dim; j++) {
-                 element[i][j] = 0;
+                 matrix[i][j] = MatrixStatus.NONE;
              }
         }
     }
@@ -48,7 +48,7 @@ class GridMatrix {
         if (ship == null) return false;
         try {
             for (Integer[] integers : ship.getPosition()) {
-                if (element[integers[0]][integers[1]] != 0) {
+                if (matrix[integers[0]][integers[1]] != MatrixStatus.NONE) {
                     throw new IllegalArgumentException("Invalid zone");
                 }
             }
@@ -85,7 +85,7 @@ class GridMatrix {
         }
         if (validateShip(ship)) {
             for (Integer[] integers : ship.getPosition()) {
-                element[integers[0]][integers[1]] = 1;
+                matrix[integers[0]][integers[1]] = MatrixStatus.SHIP;
             }
             fleet.add(ship);
             return ship;
@@ -101,7 +101,7 @@ class GridMatrix {
         if (ship != null) {
             fleet.remove(ship);
             for (Integer[] integers : ship.getPosition()) {
-                element[integers[0]][integers[1]] = 0;
+                matrix[integers[0]][integers[1]] = MatrixStatus.NONE;
             }
             return ship;
         }
@@ -112,18 +112,18 @@ class GridMatrix {
         return fleet;
     }
 
-    Integer[][] getMatrix(){
-        return element;
+    MatrixStatus[][] getMatrix(){
+        return matrix;
     }
 
-    Integer getElement(int i, int j){
-        return element[i][j];
+    MatrixStatus getElement(int i, int j){
+        return matrix[i][j];
     }
 
 
     // debug function
     void print() {
-        Log.d("TAG", "matrice\n"+ Arrays.deepToString(element)
+        Log.d("TAG", "matrice\n"+ Arrays.deepToString(matrix)
                 .replace("[[", "|")
                 .replace("[", "|")
                 .replace("], ", "|\n")
