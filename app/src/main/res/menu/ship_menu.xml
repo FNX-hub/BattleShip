@@ -9,19 +9,19 @@
         <menu>
 
             <item
-                android:id="@+id/mdeiumTop"
+                android:id="@+id/mediumTop"
                 android:title="Top" />
             <item
-                android:id="@+id/mdeiumRight"
+                android:id="@+id/mediumRight"
                 android:title="Right" />
             <item
-                android:id="@+id/mdeiumBottom"
+                android:id="@+id/mediumBottom"
                 android:title="Bottom"></item>
             <item
-                android:id="@+id/mdeiumLeft"
+                android:id="@+id/mediumLeft"
                 android:title="Left" />
             <item
-                android:id="@+id/mdeiumAuto"
+                android:id="@+id/mediumAuto"
                 android:title="Auto" />
         </menu>
     </item>

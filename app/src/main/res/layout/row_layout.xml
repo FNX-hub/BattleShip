@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="?attr/dividerVertical"
+    android:showDividers="middle|beginning|end">
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv0"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv7"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv9"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+    <it.tranigrillo.battleship.view.SquareCardView
+        android:id="@+id/scv10"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/shipsink"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+    </it.tranigrillo.battleship.view.SquareCardView>
+
+</LinearLayout>

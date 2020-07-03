@@ -1,4 +1,4 @@
-package it.tranigrillo.battleship;
+package it.tranigrillo.battleship.model;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,22 +8,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class GridMatrix {
+public class Matrix {
     private final Context context;
-    private MatrixStatus[][] matrix;
-    private ArrayList<Ship> fleet = new ArrayList<>();
+    private MatrixStatus[][] status;
+    private List<Ship> fleet = new ArrayList<>();
 
-    GridMatrix(Context context, int dim) {
+    public Matrix(Context context, int dim) {
         this.context = context;
-        matrix = new MatrixStatus[dim][dim];
+        status = new MatrixStatus[dim][dim];
         for (int i = 0; i < dim; i++) {
              for (int j = 0; j < dim; j++) {
-                 matrix[i][j] = MatrixStatus.NONE;
+                 status[i][j] = MatrixStatus.NONE;
              }
         }
     }
 
-    private Ship createShip(int x, int y, Fleet size, Orientation orientation) {
+    public Matrix(Context context, MatrixStatus[][] status, List<Ship> fleet) {
+        this.context = context;
+        this.status = status;
+        this.fleet = fleet;
+    }
+
+    private Ship createShip(int x, int y, ShipDimension size, ShipOrientation orientation) {
         Ship ship;
         switch (size) {
             case SMALL:
@@ -48,7 +54,7 @@ class GridMatrix {
         if (ship == null) return false;
         try {
             for (Integer[] integers : ship.getPosition()) {
-                if (matrix[integers[0]][integers[1]] != MatrixStatus.NONE) {
+                if (status[integers[0]][integers[1]] != MatrixStatus.NONE) {
                     throw new IllegalArgumentException("Invalid zone");
                 }
             }
@@ -58,7 +64,7 @@ class GridMatrix {
         return true;
     }
 
-    Ship findShipByElement(int posX, int posY) {
+    public Ship findShipByElement(int posX, int posY) {
         for (Ship ship : fleet) {
             if (ship.findShipByElement(posX, posY)) {
                 return ship;
@@ -67,11 +73,11 @@ class GridMatrix {
         return null;
     }
 
-    Ship addShip(int x, int y, Fleet size, Orientation orientation) {
+    public Ship addShip(int x, int y, ShipDimension size, ShipOrientation orientation) {
         Ship ship = null;
         if (orientation == null) {
-            for (Orientation tryOrientation : Orientation.values()) {
-                if (tryOrientation == Orientation.NONE) {
+            for (ShipOrientation tryOrientation : ShipOrientation.values()) {
+                if (tryOrientation == ShipOrientation.NONE) {
                     continue;
                 }
                 ship = createShip(x, y, size, tryOrientation);
@@ -85,7 +91,7 @@ class GridMatrix {
         }
         if (validateShip(ship)) {
             for (Integer[] integers : ship.getPosition()) {
-                matrix[integers[0]][integers[1]] = MatrixStatus.SHIP;
+                status[integers[0]][integers[1]] = MatrixStatus.SHIP;
             }
             fleet.add(ship);
             return ship;
@@ -96,37 +102,38 @@ class GridMatrix {
         }
     }
 
-    Ship removeShip(int posX, int posY) {
+    public Ship removeShip(int posX, int posY) {
         Ship ship = findShipByElement(posX, posY);
         if (ship != null) {
             fleet.remove(ship);
             for (Integer[] integers : ship.getPosition()) {
-                matrix[integers[0]][integers[1]] = MatrixStatus.NONE;
+                status[integers[0]][integers[1]] = MatrixStatus.NONE;
             }
             return ship;
         }
         return null;
     }
 
-    List<Ship> getFleet() {
+    public List<Ship> getFleet() {
         return fleet;
     }
 
-    MatrixStatus[][] getMatrix(){
-        return matrix;
+    public MatrixStatus[][] getStatus(){
+        return status;
     }
 
     MatrixStatus getElement(int i, int j){
-        return matrix[i][j];
+        return status[i][j];
     }
 
 
     // debug function
-    void print() {
-        Log.d("TAG", "matrice\n"+ Arrays.deepToString(matrix)
+    public Matrix print() {
+        Log.d("TAG", "matrice\n"+ Arrays.deepToString(status)
                 .replace("[[", "|")
                 .replace("[", "|")
                 .replace("], ", "|\n")
                 .replace("]]", "|"));
+        return this;
     }
 }

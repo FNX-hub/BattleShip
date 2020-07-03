@@ -1,13 +1,13 @@
-package it.tranigrillo.battleship;
+package it.tranigrillo.battleship.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Ship {
+public abstract class Ship {
 
     private Integer[] start = new Integer[2];
     private int life;
-    private Orientation orientation;
+    private ShipOrientation orientation;
     private List<Integer[]> position = new ArrayList<>();
 
     private Ship(int posX, int posY) {
@@ -15,7 +15,7 @@ abstract class Ship {
         start[1] = posY;
     }
 
-    void setOrientation(Orientation orientation, int len) {
+    public void setOrientation(ShipOrientation orientation, int len) {
         this.orientation = orientation;
         for(int i = 0; i < len; i++) {
             switch (orientation) {
@@ -36,22 +36,22 @@ abstract class Ship {
         }
     }
 
-    List<Integer[]> getPosition(){
+    public List<Integer[]> getPosition(){
         return position;
     }
 
-    boolean findShipByElement(int posX, int posY) {
+    public boolean findShipByElement(int posX, int posY) {
         for (Integer[] integers : position) {
             if (integers[0] == posX && integers[1] == posY) return true;
         }
         return false;
     }
 
-    Orientation getShipOrientation() {
+    public ShipOrientation getShipOrientation() {
         return orientation;
     }
 
-    boolean isHit(int posX, int posY) {
+    public boolean isHit(int posX, int posY) {
         if (findShipByElement(posX, posY)) {
             life--;
             return true;
@@ -59,41 +59,41 @@ abstract class Ship {
         return false;
     }
 
-    boolean isSink() {
+    public boolean isSink() {
         return life == 0;
     }
 
 //    ---------------------------------------------------------------------------------------
 
-    static class SmallShip extends Ship {
+    public static class SmallShip extends Ship {
         SmallShip(int posX, int posY) {
             super(posX, posY);
             super.life = 1;
-            super.orientation = Orientation.NONE;
+            super.orientation = ShipOrientation.NONE;
 
             super.position.add(0, new Integer[]{posX, posY});
 
         }
     }
 
-    static class MediumShip extends Ship {
-        MediumShip(int posX, int posY, Orientation mode) {
+    public static class MediumShip extends Ship {
+        MediumShip(int posX, int posY, ShipOrientation mode) {
             super(posX, posY);
             super.life = 2;
             setOrientation(mode, 2);
         }
     }
 
-    static class LargeShip extends Ship {
-        LargeShip(int posX, int posY, Orientation mode) {
+    public static class LargeShip extends Ship {
+        LargeShip(int posX, int posY, ShipOrientation mode) {
             super(posX, posY);
             super.life = 3;
             setOrientation(mode, 3);
         }
     }
 
-    static class ExtraLargeShip extends Ship {
-        ExtraLargeShip(int posX, int posY, Orientation mode) {
+    public static class ExtraLargeShip extends Ship {
+        ExtraLargeShip(int posX, int posY, ShipOrientation mode) {
             super(posX, posY);
             super.life = 4;
             setOrientation(mode, 4);

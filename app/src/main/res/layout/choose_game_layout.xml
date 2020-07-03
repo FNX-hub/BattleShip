@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".activity.MainActivity">
 
     <RelativeLayout
@@ -21,13 +22,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:paddingBottom="32dp"
             android:ellipsize="end"
             android:fontFamily="casual"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:text="@string/app_name"
+            android:text="@string/choose_game_type"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -35,89 +35,89 @@
             android:textStyle="bold|italic" />
 
         <Button
-            android:id="@+id/btnCustomPlay"
+            android:id="@+id/btnEasy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/tvTitle"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:padding="24dp"
-            android:text="@string/start_new_play"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:backgroundTint="@color/shipsink"
+            android:fontFamily="casual"
+            android:text="@string/player_vs_goldfish" />
 
         <Button
-            android:id="@+id/btnProfile"
+            android:id="@+id/btnMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnCustomPlay"
+            android:padding="24dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:padding="24dp"
-            android:text="@string/captain_s_cabin"
+            android:layout_below="@id/btnEasy"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:backgroundTint="@color/shipsink"
+            android:fontFamily="casual"
+            android:text="@string/player_vs_seapuppy" />
 
         <Button
-            android:id="@+id/btnGameHistory"
+            android:id="@+id/btnPlayerLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnProfile"
+            android:padding="24dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:padding="24dp"
-            android:text="@string/logbook"
+            android:layout_below="@id/btnMedium"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:backgroundTint="@color/shipsink"
+            android:fontFamily="casual"
+            android:text="@string/player_vs_palyer_local" />
 
         <Button
-            android:id="@+id/btnOption"
+            android:id="@+id/btnPlayerBluetooth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnGameHistory"
+            android:padding="24dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:padding="24dp"
-            android:text="@string/option"
+            android:layout_below="@id/btnPlayerLocal"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:backgroundTint="@color/shipsink"
+            android:fontFamily="casual"
+            android:text="@string/player_vs_palyer_bluetooth" />
 
         <Button
-            android:id="@+id/btnHelp"
+            android:id="@+id/btnPlayerWIFI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnOption"
+            android:padding="24dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:padding="24dp"
-            android:text="@string/help"
+            android:layout_below="@id/btnPlayerBluetooth"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:backgroundTint="@color/shipsink"
+            android:fontFamily="casual"
+            android:text="@string/player_vs_palyer_wi_fi" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
