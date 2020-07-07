@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="shipsink">#01579B</color>
-    <color name="shipsink2">#40C4FF</color>
+    <color name="colorPrimary">#01579B</color>
+    <color name="colorPrimaryDark">#002f6c</color>
+<!--    <color name="colorAccent">#40C4FF</color>-->
+    <color name="colorAccent">#4f83cc</color>
+
+    <color name="colorSecondary">#ffffff</color>
+    <color name="colorSecondaryDark">#cccccc</color>
+    <!--    <color name="colorAccent">#40C4FF</color>-->
 </resources>

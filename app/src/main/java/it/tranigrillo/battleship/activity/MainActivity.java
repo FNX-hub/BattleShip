@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,18 +20,16 @@ public class MainActivity extends AppCompatActivity {
         Button btnProfile;
         Button btnGameHistory;
         Button btnOption;
-        Button btnHelp;
         Holder() {
             btnCustomPlay = findViewById(R.id.btnCustomPlay);
-            btnCustomPlay.setOnClickListener(this);
             btnProfile = findViewById(R.id.btnProfile);
-            btnProfile.setOnClickListener(this);
             btnGameHistory = findViewById(R.id.btnGameHistory);
-            btnGameHistory.setOnClickListener(this);
             btnOption = findViewById(R.id.btnOption);
+
+            btnCustomPlay.setOnClickListener(this);
+            btnProfile.setOnClickListener(this);
+            btnGameHistory.setOnClickListener(this);
             btnOption.setOnClickListener(this);
-            btnHelp = findViewById(R.id.btnHelp);
-            btnHelp.setOnClickListener(this);
         }
 
         @Override
@@ -51,16 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btnOption:
                     activityIntent = new Intent(MainActivity.this, OptionActivity.class);
                     break;
-                case R.id.btnHelp:
-                    activityIntent = new Intent(MainActivity.this, HelpActivity.class);
-                    break;
                 default:
                     return;
             }
-            MainActivity.this.startActivityForResult(activityIntent, RESULT);
+            startActivityForResult(activityIntent, RESULT);
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

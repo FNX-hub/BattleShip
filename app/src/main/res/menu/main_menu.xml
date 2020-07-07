@@ -3,9 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/miOption"
-        android:title="Option" />
+        android:id="@+id/miProfile"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/captain_s_cabin"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/miHelp"
-        android:title="Help" />
+        android:id="@+id/miLoogbook"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/logbook"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/miOption"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/option"
+        app:showAsAction="ifRoom" />
 </menu>

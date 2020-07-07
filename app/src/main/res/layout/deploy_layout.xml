@@ -1,125 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
+    <View
+        android:id="@+id/middle"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tvSmallShipCounter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@id/middle"
+
+        android:fontFamily="casual"
         android:padding="8dp"
-        app:columnCount="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        tools:text="Remaining: X" />
 
-        <TextView
-            android:id="@+id/tvSmallShipCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:text="Remaning: 3"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic"
-            app:layout_columnWeight="1" />
+    <TextView
+        android:id="@+id/tvMediumShipCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@id/middle"
 
-        <TextView
-            android:id="@+id/tvMediumShipCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:text="Remaning: 3"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic"
-            app:layout_columnWeight="1" />
+        android:fontFamily="casual"
+        android:padding="8dp"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        tools:text="Remaining: X" />
 
-        <TextView
-            android:id="@+id/tvLargeShipCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:text="Remaining: 3"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic"
-            app:layout_columnWeight="1" />
+    <TextView
+        android:id="@+id/tvLargeShipCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSmallShipCounter"
+        android:layout_alignParentStart="true"
+        android:layout_alignStart="@id/middle"
 
-        <TextView
-            android:id="@+id/tvExtraLArgeShipCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:text="Remaining: 3"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic"
-            app:layout_columnWeight="1" />
+        android:fontFamily="casual"
+        android:padding="8dp"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        tools:text="Remaining: X" />
 
-    </androidx.gridlayout.widget.GridLayout>
+    <TextView
+        android:id="@+id/tvExtraLargeShipCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMediumShipCounter"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@id/middle"
+
+        android:fontFamily="casual"
+        android:padding="8dp"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        tools:text="Remaining: X" />
 
     <it.tranigrillo.battleship.view.Board
-        android:id="@+id/board"
-        android:layout_width="0dp"
+        android:id="@+id/brdDeploy"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:divider="?android:attr/listDivider"
-        android:showDividers="middle|beginning|end"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        android:layout_below="@id/tvExtraLargeShipCounter"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
+    </it.tranigrillo.battleship.view.Board>
+
+    <Button
+        android:id="@+id/btnAuto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/brdDeploy"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@id/middle"
+
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:text="@string/auto"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold"/>
 
-        <Button
-            android:id="@+id/btnAuto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:text="Auto"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brdDeploy"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@id/middle"
 
-        <Button
-            android:id="@+id/btnConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:text="Confirm"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic" />
-    </LinearLayout>
+        android:padding="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:text="@string/confirm"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

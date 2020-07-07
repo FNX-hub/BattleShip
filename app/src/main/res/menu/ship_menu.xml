@@ -2,71 +2,71 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/shortShip"
-        android:title="ShortShip"/>
+        android:title="@string/small_ship"/>
     <item
         android:id="@+id/mediumShip"
-        android:title="MediumShip">
+        android:title="@string/medium_ship">
         <menu>
 
             <item
                 android:id="@+id/mediumTop"
-                android:title="Top" />
+                android:title="@string/top" />
             <item
                 android:id="@+id/mediumRight"
-                android:title="Right" />
+                android:title="@string/right" />
             <item
                 android:id="@+id/mediumBottom"
-                android:title="Bottom"></item>
+                android:title="@string/bottom" />
             <item
                 android:id="@+id/mediumLeft"
-                android:title="Left" />
+                android:title="@string/left" />
             <item
                 android:id="@+id/mediumAuto"
-                android:title="Auto" />
+                android:title="@string/auto" />
         </menu>
     </item>
     <item
         android:id="@+id/largeShip"
-        android:title="LargeShip">
+        android:title="@string/large_ship">
         <menu>
 
             <item
                 android:id="@+id/largeTop"
-                android:title="Top" />
+                android:title="@string/top" />
             <item
                 android:id="@+id/largeRight"
-                android:title="Right" />
+                android:title="@string/right" />
             <item
                 android:id="@+id/largeBottom"
-                android:title="Bottom"></item>
+                android:title="@string/bottom"></item>
             <item
                 android:id="@+id/largeLeft"
-                android:title="Left" />
+                android:title="@string/left" />
             <item
                 android:id="@+id/largeAuto"
-                android:title="Auto" />
+                android:title="@string/auto" />
         </menu>
     </item>
     <item
         android:id="@+id/extraLargeShip"
-        android:title="ExtraLargeShip">
+        android:title="@string/extra_large_ship">
         <menu>
 
             <item
                 android:id="@+id/extraLargeTop"
-                android:title="Top" />
+                android:title="@string/top" />
             <item
                 android:id="@+id/extraLargeRight"
-                android:title="Right" />
+                android:title="@string/right" />
             <item
                 android:id="@+id/extraLargeBottom"
-                android:title="Bottom"></item>
+                android:title="@string/bottom"></item>
             <item
                 android:id="@+id/extraLargeLeft"
-                android:title="Left" />
+                android:title="@string/left" />
             <item
                 android:id="@+id/extraLargeAuto"
-                android:title="Auto" />
+                android:title="@string/auto" />
         </menu>
     </item>
 

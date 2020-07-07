@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:divider="?attr/dividerVertical"
     android:showDividers="middle|beginning|end">
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv0"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -25,12 +24,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -48,12 +48,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -71,12 +72,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv3"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -94,12 +96,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv4"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -117,12 +120,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv5"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -140,12 +144,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv6"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -163,12 +168,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv7"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -186,12 +192,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv8"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -209,12 +216,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv9"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -232,12 +240,13 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="A" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
+    </it.tranigrillo.battleship.view.Box>
 
-    <it.tranigrillo.battleship.view.SquareCardView
+    <it.tranigrillo.battleship.view.Box
         android:id="@+id/scv10"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -255,9 +264,9 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textColor="@color/shipsink"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                tools:text="A"
+                android:textStyle="bold" />
         </RelativeLayout>
-    </it.tranigrillo.battleship.view.SquareCardView>
-
+    </it.tranigrillo.battleship.view.Box>
 </LinearLayout>

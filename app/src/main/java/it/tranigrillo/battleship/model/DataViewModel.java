@@ -13,12 +13,17 @@ import it.tranigrillo.battleship.model.database.AchievementDatabaseAPI;
 import it.tranigrillo.battleship.model.database.Clash;
 import it.tranigrillo.battleship.model.database.ClashDatabaseAPI;
 
+// classe che implementa un ViewModel per la gestione delle entity del DB sfrutta le databaseAPI delle entity
+// per eseguire operazioni sul DB basta istanziare solo questa classe
 public class DataViewModel extends AndroidViewModel {
     private AchievementDatabaseAPI achievementDatabaseAPI;
     private ClashDatabaseAPI clashDatabaseAPI;
     private LiveData<List<Achievement>> allAchievements;
     private LiveData<List<Clash>> allClashes;
 
+//---------------------------
+//    COSTRUTTORE
+// --------------------------
     public DataViewModel(@NonNull Application application) {
         super(application);
         achievementDatabaseAPI = new AchievementDatabaseAPI(application);
@@ -26,6 +31,11 @@ public class DataViewModel extends AndroidViewModel {
         allAchievements = achievementDatabaseAPI.getAllAchievement();
         allClashes = clashDatabaseAPI.getAllClash();
     }
+
+
+//--------------------------------------------
+//    METODI PER ESEGUIRE OPERAZIONI SUL DB
+//--------------------------------------------
 
     public void insert(Achievement achievement) {
         achievementDatabaseAPI.insert(achievement);

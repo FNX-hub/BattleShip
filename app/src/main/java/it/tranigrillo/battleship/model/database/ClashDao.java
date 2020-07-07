@@ -25,6 +25,6 @@ public interface ClashDao {
     @Query("DELETE FROM clash_table")
     void deleteAllClash();
 
-    @Query("SELECT * FROM clash_table ORDER BY date")
+    @Query("SELECT * FROM clash_table")
     LiveData<List<Clash>> getAllClash();
 }

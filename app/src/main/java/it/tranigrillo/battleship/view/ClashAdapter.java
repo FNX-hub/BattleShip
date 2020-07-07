@@ -16,6 +16,10 @@ import java.util.List;
 import it.tranigrillo.battleship.R;
 import it.tranigrillo.battleship.model.database.Clash;
 
+
+// RecycleView Adapter per l'activity HistoryActivity.java
+// fa l'inflate del layout clash_layout.xml
+
 public class ClashAdapter extends RecyclerView.Adapter<ClashAdapter.ClashHolder> {
     private List<Clash> clashes = new ArrayList<>();
 
@@ -32,14 +36,25 @@ public class ClashAdapter extends RecyclerView.Adapter<ClashAdapter.ClashHolder>
         Clash clash = clashes.get(position);
         Drawable drawable = null;
         holder.tvItemTitle.setText(clash.getTitle());
-        if (clash.getGameTime() != null) holder.tvDescription.setText(clash.getGameTime());
-        else holder.tvDescription.setVisibility(View.GONE);
-        if (clash.isVictory()) drawable = holder.context.getDrawable(R.drawable.ic_victory);
-        else drawable = holder.context.getDrawable(R.drawable.ic_lose);
-        int h = drawable.getIntrinsicHeight();
-        int w = drawable.getIntrinsicWidth();
-        drawable.setBounds( 0, 0, w, h );
-        holder.tvItemTitle.setCompoundDrawables(null, null, drawable, null);
+        if (clash.isVictory()) {
+            drawable = holder.context.getDrawable(R.drawable.ic_victory);
+        }
+        if (clash.isVictory()) {
+            drawable = holder.context.getDrawable(R.drawable.ic_lose);
+        }
+        if (clash.getGameTime() != null) {
+            holder.tvDescription.setText(clash.getGameTime());
+        }
+        else {
+            holder.tvDescription.setVisibility(View.GONE);
+            drawable = null;
+        }
+        if (drawable != null) {
+            int h = drawable.getIntrinsicHeight();
+            int w = drawable.getIntrinsicWidth();
+            drawable.setBounds(0, 0, w, h);
+            holder.tvItemTitle.setCompoundDrawables(null, null, drawable, null);
+        }
     }
 
     @Override

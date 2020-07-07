@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginEnd="1dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="4dp">
     
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -25,8 +24,8 @@
             android:fontFamily="casual"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             tools:text="Title" />
 
         <TextView
@@ -36,7 +35,7 @@
             android:layout_below="@+id/tvItemTitle"
             android:fontFamily="casual"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             tools:text="description" />
     </RelativeLayout>
 

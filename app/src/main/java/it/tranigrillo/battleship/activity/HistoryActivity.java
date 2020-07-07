@@ -50,13 +50,14 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clash_history_layout);
-        Objects.requireNonNull(getActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         new Holder(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        menu.removeItem(R.id.miLoogbook);
         return true;
     }
 
@@ -71,8 +72,8 @@ public class HistoryActivity extends AppCompatActivity {
                 activityIntent = new Intent(HistoryActivity.this, OptionActivity.class);
                 startActivityForResult(activityIntent, RESULT);
                 return true;
-            case R.id.miHelp:
-                activityIntent = new Intent(HistoryActivity.this, HelpActivity.class);
+            case R.id.miProfile:
+                activityIntent = new Intent(HistoryActivity.this, ProfileActivity.class);
                 startActivityForResult(activityIntent, RESULT);
                 return true;
         }

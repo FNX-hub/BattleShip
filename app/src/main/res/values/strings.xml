@@ -12,8 +12,32 @@
     <string name="game_time">Game Time</string>
     <string name="choose_game_type">Choose Game Type</string>
     <string name="player_vs_goldfish">Player vs Goldfish</string>
-    <string name="player_vs_seapuppy">Player vs Seapuppy</string>
-    <string name="player_vs_palyer_local">Player vs Palyer (Local)</string>
-    <string name="player_vs_palyer_bluetooth">Player vs Palyer (Bluetooth?)</string>
-    <string name="player_vs_palyer_wi_fi">Player vs Palyer (WI-FI?)</string>
+    <string name="player_vs_sea_puppy">Player vs Seapuppy</string>
+    <string name="player_vs_player_local">Player vs Player (Local)</string>
+    <string name="player_vs_player_connection">Player vs Player (Connection)</string>
+
+    <string name="small">Small: %d</string>
+    <string name="medium">Medium: %d</string>
+    <string name="large">Large: %d</string>
+    <string name="extra_large">ExtraLarge: %d</string>
+    <string name="confirm">Confirm</string>
+    <string name="small_remaining">Small remaining: %d</string>
+    <string name="medium_remaining">Medium remaining: %d</string>
+    <string name="large_remaining">Large remaining: %d</string>
+    <string name="extra_large_remaining">Extra large remaining: %d</string>
+    <string name="choose_rule">Choose Rule</string>
+    <string name="standard">Standard</string>
+    <string name="only_small">Only Small</string>
+    <string name="only_extra_large">Only Extra large</string>
+    <string name="time_remaining">Time %d:%d</string>
+    <string name="small_ship">Small Ship</string>
+    <string name="medium_ship">Medium Ship</string>
+    <string name="top">Top</string>
+    <string name="right">Right</string>
+    <string name="bottom">Bottom</string>
+    <string name="left">Left</string>
+    <string name="auto">Auto</string>
+    <string name="large_ship">Large Ship</string>
+    <string name="extra_large_ship">Extra Large Ship</string>
+    <string name="invalid_position">Invalid position</string>
 </resources>

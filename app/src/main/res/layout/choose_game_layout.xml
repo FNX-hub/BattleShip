@@ -1,123 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="8dp"
     tools:context=".activity.MainActivity">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:ellipsize="end"
+
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/choose_game_type"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/rgRules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:checkedButton="@id/rbStandard">
 
         <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvRule"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:paddingBottom="32dp"
-            android:ellipsize="end"
             android:fontFamily="casual"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="@string/choose_game_type"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/shipsink"
-            android:textStyle="bold|italic" />
+            android:text="@string/choose_rule"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnEasy"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/rbStandard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/tvTitle"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:backgroundTint="@color/shipsink"
             android:fontFamily="casual"
-            android:text="@string/player_vs_goldfish" />
+            android:text="@string/standard"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnMedium"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/rbOnlySmall"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/btnEasy"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:backgroundTint="@color/shipsink"
             android:fontFamily="casual"
-            android:text="@string/player_vs_seapuppy" />
+            android:text="@string/only_small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnPlayerLocal"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/rbOnlyExtraLarge"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/btnMedium"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:backgroundTint="@color/shipsink"
             android:fontFamily="casual"
-            android:text="@string/player_vs_palyer_local" />
+            android:text="@string/only_extra_large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </RadioGroup>
 
-        <Button
-            android:id="@+id/btnPlayerBluetooth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/btnPlayerLocal"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:text="@string/player_vs_palyer_bluetooth" />
+    <Button
+        android:id="@+id/btnEasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rgRules"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="24dp"
 
-        <Button
-            android:id="@+id/btnPlayerWIFI"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/btnPlayerBluetooth"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold|italic"
-            android:backgroundTint="@color/shipsink"
-            android:fontFamily="casual"
-            android:text="@string/player_vs_palyer_wi_fi" />
-    </RelativeLayout>
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:text="@string/player_vs_goldfish"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnEasy"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:padding="24dp"
+        android:text="@string/player_vs_sea_puppy"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnPlayerLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnMedium"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:padding="24dp"
+        android:text="@string/player_vs_player_local"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnPlayerBluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnPlayerLocal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:padding="24dp"
+        android:text="@string/player_vs_player_connection"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

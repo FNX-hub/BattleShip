@@ -7,6 +7,9 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+
+// classe che ha lo scopo di essere un API per lavorare sul DB in maniera agevole,
+// offrendo dei metodi alle operazioni sull'entity Achievement
 public class AchievementDatabaseAPI {
     private AchievementDao achievementDao;
     private LiveData<List<Achievement>> allAchievement;
@@ -37,11 +40,13 @@ public class AchievementDatabaseAPI {
         return allAchievement;
     }
 
+
+    // metodi per lavorare in modo asincrono sul DB
     private static class InsertAchievementAsyncTask extends AsyncTask<Achievement, Void, Void> {
 
         private AchievementDao achievementDao;
 
-        public InsertAchievementAsyncTask(AchievementDao achievementDao) {
+        InsertAchievementAsyncTask(AchievementDao achievementDao) {
             this.achievementDao = achievementDao;
         }
 
@@ -56,7 +61,7 @@ public class AchievementDatabaseAPI {
 
         private AchievementDao achievementDao;
 
-        public UpdateAchievementAsyncTask(AchievementDao achievementDao) {
+        UpdateAchievementAsyncTask(AchievementDao achievementDao) {
             this.achievementDao = achievementDao;
         }
 
@@ -71,7 +76,7 @@ public class AchievementDatabaseAPI {
 
         private AchievementDao achievementDao;
 
-        public DeleteAchievementAsyncTask(AchievementDao achievementDao) {
+        DeleteAchievementAsyncTask(AchievementDao achievementDao) {
             this.achievementDao = achievementDao;
         }
 
@@ -86,7 +91,7 @@ public class AchievementDatabaseAPI {
 
         private AchievementDao achievementDao;
 
-        public DeleteAllAchievementAsyncTask(AchievementDao achievementDao) {
+        DeleteAllAchievementAsyncTask(AchievementDao achievementDao) {
             this.achievementDao = achievementDao;
         }
 

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,14 +29,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     private DataViewModel dataViewModel;
     private RecyclerView rvAchievements;
-    private Button btnLoogbook;
 
     private class Holder implements View.OnClickListener {
 
         Holder(Context context) {
             rvAchievements = findViewById(R.id.rvAchievement);
-            btnLoogbook = findViewById(R.id.btnLoogbook);
-            btnLoogbook.setOnClickListener(this);
 
             final AchievementAdapter adapter = new AchievementAdapter();
             rvAchievements.setLayoutManager(new LinearLayoutManager(context));
@@ -64,13 +60,14 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
-        Objects.requireNonNull(getActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         new Holder(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        menu.removeItem(R.id.miProfile);
         return true;
     }
 
@@ -85,8 +82,8 @@ public class ProfileActivity extends AppCompatActivity {
                 activityIntent = new Intent(ProfileActivity.this, OptionActivity.class);
                 startActivityForResult(activityIntent, RESULT);
                 return true;
-            case R.id.miHelp:
-                activityIntent = new Intent(ProfileActivity.this, HelpActivity.class);
+            case R.id.miLoogbook:
+                activityIntent = new Intent(ProfileActivity.this, HistoryActivity.class);
                 startActivityForResult(activityIntent, RESULT);
                 return true;
         }

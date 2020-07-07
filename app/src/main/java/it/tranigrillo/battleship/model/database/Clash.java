@@ -19,37 +19,39 @@ public class Clash {
     @ColumnInfo(name = "victory")
     private boolean victory;
 
-    @ColumnInfo(name = "date")
-    private String date;
-
-    public Clash(String title, String gameTime, boolean victory, String date) {
-        this.title = title;
-        this.gameTime = gameTime;
-        this.victory = victory;
-        this.date = date;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Clash() {
+        this.victory = false;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getGameTime() {
         return gameTime;
     }
 
+    public void setGameTime(String gameTime) {
+        this.gameTime = gameTime;
+    }
+
     public boolean isVictory() {
         return victory;
     }
 
-    public String getDate() {
-        return date;
+    public void setVictory(boolean victory) {
+        this.victory = victory;
     }
 }

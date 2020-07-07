@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@android:drawable/divider_horizontal_bright"
+    android:orientation="vertical"
+    android:showDividers="middle|beginning|end">
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/col"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <it.tranigrillo.battleship.view.Row
+        android:id="@+id/row10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

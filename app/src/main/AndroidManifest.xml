@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.tranigrillo.battleship">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -16,16 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChooseGameActivity"/>
+        <activity android:name=".activity.ChooseGameActivity"
+            android:label="@string/start_new_play"/>
         <activity android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.MainActivity"/>
-        <activity android:name=".activity.HistoryActivity"/>
+            android:label="@string/captain_s_cabin"/>
+        <activity android:name=".activity.HistoryActivity"
+            android:label="@string/logbook"/>
         <activity android:name=".activity.DeployActivity"
-            android:label="Deploy fleet"
-            android:parentActivityName=".activity.ChooseGameActivity"/>
+            android:label="Deploy fleet"/>
         <activity android:name=".activity.GameActivity"/>
-        <activity android:name=".activity.OptionActivity"/>
-        <activity android:name=".activity.HelpActivity"/>
+        <activity android:name=".activity.OptionActivity"
+            android:label="@string/option"/>
     </application>
 
 </manifest>

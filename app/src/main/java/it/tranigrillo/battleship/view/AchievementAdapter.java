@@ -16,6 +16,10 @@ import java.util.List;
 import it.tranigrillo.battleship.R;
 import it.tranigrillo.battleship.model.database.Achievement;
 
+
+
+// RecycleView Adapter per l'activity ProfileActivity.java
+// fa l'inflate layout achievement_layout.xml
 public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.AchievementHolder> {
     private List<Achievement> achievements = new ArrayList<>();
 
