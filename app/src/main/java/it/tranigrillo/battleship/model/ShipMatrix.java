@@ -144,7 +144,7 @@ public class ShipMatrix implements Serializable {
 
     // debug function
     public ShipMatrix print() {
-        Log.d("TAG", "matrice\n"+ Arrays.deepToString(cellStatuses)
+        Log.d("BOARD", "matrice\n"+ Arrays.deepToString(cellStatuses)
                 .replace("[[", "|")
                 .replace("[", "|")
                 .replace("], ", "|\n")

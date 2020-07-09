@@ -68,10 +68,6 @@ public class HistoryActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.miOption:
-                activityIntent = new Intent(HistoryActivity.this, OptionActivity.class);
-                startActivityForResult(activityIntent, RESULT);
-                return true;
             case R.id.miProfile:
                 activityIntent = new Intent(HistoryActivity.this, ProfileActivity.class);
                 startActivityForResult(activityIntent, RESULT);

@@ -19,17 +19,14 @@ public class MainActivity extends AppCompatActivity {
         Button btnCustomPlay;
         Button btnProfile;
         Button btnGameHistory;
-        Button btnOption;
         Holder() {
             btnCustomPlay = findViewById(R.id.btnCustomPlay);
             btnProfile = findViewById(R.id.btnProfile);
             btnGameHistory = findViewById(R.id.btnGameHistory);
-            btnOption = findViewById(R.id.btnOption);
 
             btnCustomPlay.setOnClickListener(this);
             btnProfile.setOnClickListener(this);
             btnGameHistory.setOnClickListener(this);
-            btnOption.setOnClickListener(this);
         }
 
         @Override
@@ -44,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.btnGameHistory:
                     activityIntent = new Intent(MainActivity.this, HistoryActivity.class);
-                    break;
-                case R.id.btnOption:
-                    activityIntent = new Intent(MainActivity.this, OptionActivity.class);
                     break;
                 default:
                     return;

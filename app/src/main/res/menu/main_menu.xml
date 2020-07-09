@@ -12,9 +12,4 @@
         android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/logbook"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/miOption"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="@string/option"
-        app:showAsAction="ifRoom" />
 </menu>

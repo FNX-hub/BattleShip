@@ -17,15 +17,14 @@ import java.util.Objects;
 
 import it.tranigrillo.battleship.R;
 import it.tranigrillo.battleship.model.Converter;
-import it.tranigrillo.battleship.model.Game;
-import it.tranigrillo.battleship.model.ShipMatrix;
+import it.tranigrillo.battleship.model.GameRule;
 import it.tranigrillo.battleship.view.Board;
 import it.tranigrillo.battleship.view.TextViewObserver;
 
 public class DeployActivity extends AppCompatActivity {
 
     private static final int RESULT = 103;
-    Game game;
+    GameRule gameRule;
 
     private class Holder implements View.OnClickListener {
         Button btnConfirm;
@@ -41,7 +40,7 @@ public class DeployActivity extends AppCompatActivity {
             btnConfirm.setOnClickListener(this);
             btnAuto.setOnClickListener(this);
 
-            brdDeploy.setGame(game, true, false);
+            brdDeploy.setGame(gameRule, true);
 //            brdDeploy.setMyShipMatrix(new ShipMatrix(10));
 
             List<TextView> list = new ArrayList<>();
@@ -58,14 +57,14 @@ public class DeployActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (v.getId() == R.id.btnAuto) {
                 brdDeploy.autoDisposition();
-                brdDeploy.getMyShipMatrix().print();
+                brdDeploy.getLogicMatrix().print();
             }
             else {
                 brdDeploy.confirmDisposition();
                 Intent activityIntent = new Intent(DeployActivity.this, GameActivity.class);
-                activityIntent.putExtra("game", game);
-                activityIntent.putExtra("matrix", new Converter().fromArrayLisr(brdDeploy.getMyShipMatrix()));
-                brdDeploy.getMyShipMatrix().print();
+                activityIntent.putExtra("game", gameRule);
+                activityIntent.putExtra("matrix", new Converter().fromArrayList(brdDeploy.getLogicMatrix()));
+                brdDeploy.getLogicMatrix().print();
                 startActivityForResult(activityIntent, RESULT);
             }
         }
@@ -76,7 +75,7 @@ public class DeployActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deploy_layout);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        game = getIntent().getParcelableExtra("game");
+        gameRule = getIntent().getParcelableExtra("game");
         new Holder();
     }
 
@@ -96,5 +95,10 @@ public class DeployActivity extends AppCompatActivity {
             default:
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

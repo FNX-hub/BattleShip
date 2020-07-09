@@ -86,7 +86,7 @@ public class Ship implements Serializable {
     }
 
     // controlla se la Ship è affondata
-    public boolean isSink() {
+    public boolean isSank() {
         return life == 0;
     }
 

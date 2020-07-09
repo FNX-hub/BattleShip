@@ -17,7 +17,7 @@ public class Converter {
         return new Gson().fromJson(value, listType);
     }
 
-    public String fromArrayLisr(ShipMatrix shipMatrix) {
+    public String fromArrayList(ShipMatrix shipMatrix) {
         if (!shipMatrix.getFleet().isEmpty()) {
             Gson gson = new Gson();
             String json = gson.toJson(shipMatrix);
@@ -26,7 +26,7 @@ public class Converter {
         return null;
     }
 
-    public String fromArrayLisr(List<Integer> list) {
+    public String fromArrayList(List<Integer> list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;

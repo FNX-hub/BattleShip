@@ -92,7 +92,7 @@ public class Row extends LinearLayout {
 //    VIEW SETTER
 //    ----------------------
 
-    // Setta il listner per le Box della Row (saltandone la prima)
+    // Setta il listner per le Box della Row (saltandone la prima che è quella con le coordinate)
     public void setClickListener(OnClickListener onClickListener, OnLongClickListener onLongClickListener) {
         for (Box box : scvList.subList(1, scvList.size())) {
             box.setOnClickListener(onClickListener);
@@ -172,10 +172,12 @@ public class Row extends LinearLayout {
     //  Setta la i-esima Box della Row come Affondata
     public void setSank(int i, BoxOrientation orientation) {
         scvList.get(i).setStatusSank(orientation);
-        setHit(i);
+//        setHit(i);
+        tvList.get(i).setText("A");
+        tvList.get(i).setVisibility(VISIBLE);
     }
 
-    //  Setta la i-esima Box della Row come Visibilie(come nave)
+    //  Setta la i-esima Box della Row come Visibile(come nave)
     public void setVisibile(int i, BoxOrientation orientation) {
         scvList.get(i).setStatusVisible(orientation);
     }

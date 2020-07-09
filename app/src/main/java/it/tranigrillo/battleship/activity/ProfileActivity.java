@@ -78,10 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.miOption:
-                activityIntent = new Intent(ProfileActivity.this, OptionActivity.class);
-                startActivityForResult(activityIntent, RESULT);
-                return true;
             case R.id.miLoogbook:
                 activityIntent = new Intent(ProfileActivity.this, HistoryActivity.class);
                 startActivityForResult(activityIntent, RESULT);

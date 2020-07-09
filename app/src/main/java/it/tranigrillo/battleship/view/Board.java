@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import it.tranigrillo.battleship.R;
-import it.tranigrillo.battleship.model.Game;
+import it.tranigrillo.battleship.model.GameRule;
 import it.tranigrillo.battleship.model.IAmanager;
 import it.tranigrillo.battleship.model.MatrixStatus;
 import it.tranigrillo.battleship.model.Ship;
@@ -37,17 +37,18 @@ import it.tranigrillo.battleship.model.ShipOrientation;
 public class Board extends CardView implements View.OnClickListener, View.OnLongClickListener {
     ArrayList<Row> rows = new ArrayList<>();
     HashMap<Box, Integer[]> boxToIndex = new HashMap<>();
-    ShipMatrix myShipMatrix;
+    ShipMatrix logicMatrix;
     Row rCol;
     Row r1; Row r2; Row r3; Row r4; Row r5;
     Row r6; Row r7; Row r8; Row r9; Row r10;
-    Game game;
+    GameRule gameRule;
     Integer smallShipCounter;
     Integer mediumShipCounter;
     Integer largeShipCounter;
     Integer extraLargeShipCounter;
     IAmanager iAmanager;
     TextViewObserver textViewObserver;
+    Integer matDim = 10;
     boolean deploy = false;
 
 //    ---------------------------------
@@ -109,22 +110,22 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                 row.setClickListener(this, this);
             }
             for (Box box : row.getScvList()){
-                boxToIndex.put(box, new Integer[]{i, row.getScvList().indexOf(box)});
+                //assegniamo una coppia di coordinate ad ogni cella
+                boxToIndex.put(box, new Integer[]{i-1, row.getScvList().indexOf(box)-1});
             }
         }
+
+        //inizializza IA per autosetting
+        iAmanager = new IAmanager("AutoSetter", 1, matDim);
+        logicMatrix = iAmanager.getMyShipMatrix();
     }
 
 
     // Setter per il Game
-    public void setGame(Game game, boolean deploy, boolean radar) {
-        this.game = game;
+    public void setGame(GameRule gameRule, boolean deploy) {
+        this.gameRule = gameRule;
         this.deploy = deploy;
-        if(radar) {
-            setRadar();
-        }
-        setRule(game.getSmallShip(), game.getMediumShip(), game.getLargeShip(), game.getExtraLargeShip());
-        iAmanager = new IAmanager("deployer", 1, 10);
-        this.myShipMatrix = iAmanager.getMyShipMatrix();
+        setRule(gameRule.getSmallShip(), gameRule.getMediumShip(), gameRule.getLargeShip(), gameRule.getExtraLargeShip());
     }
 
     //  Setter per i contatori delle Ship (quante e quali sono disponibili)
@@ -135,36 +136,38 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
         extraLargeShipCounter = xl;
     }
 
-    public void confirmDisposition() {
-        iAmanager.fillWater();
-    }
-
-    //  Setter per shipMatrix
-    public void setMyShipMatrix(ShipMatrix myShipMatrix) {
-        this.myShipMatrix = myShipMatrix;
-    }
-
-    //  Getter per shipMatrix
-    public ShipMatrix getMyShipMatrix() {
-        return myShipMatrix;
-    }
 
     //  Imposta se la Board è in modalità radar (solo visione della flotta della matrice passata)
-    private void setRadar() {
-        deploy = false;
+    public void setRadar() {
+//        deploy = false;
         for (Row row : rows) {
             row.setFontSize(7);
-            row.setClickListener(null, null);
+//            row.setClickListener(null, null);
             row.setClickable(false);
         }
-        for (Ship ship : myShipMatrix.getFleet()) {
+        for (Ship ship : logicMatrix.getFleet()) {
             showShip(ship);
         }
     }
 
+    //  Setter per shipMatrix
+    public void setLogicMatrix(ShipMatrix logicMatrix) {
+        this.logicMatrix = logicMatrix;
+    }
+
+    //  Getter per shipMatrix
+    public ShipMatrix getLogicMatrix() {
+        return logicMatrix;
+    }
+
+
+    public void confirmDisposition() {
+        iAmanager.fillWater();
+    }
+
     //  Restituisce la Box di riferimento alle coordiante della matrice
     public Box getBox(int posX, int posY) {
-        return rows.get(posX).getScvList().get(posY);
+        return rows.get(posX+1).getScvList().get(posY+1);
     }
 
     public void setTextViewObserver(TextViewObserver observer) {
@@ -214,7 +217,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
             switch (item.getItemId()){
                 case R.id.shortShip:
                     if(smallShipCounter >0) {
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.SMALL, null);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.SMALL, null);
                         if(ship != null){
                             smallShipCounter--;
                         }
@@ -225,7 +228,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.mediumTop:
                     if(mediumShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.VERTICAL_TOP);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.VERTICAL_TOP);
                         if(ship != null){
                             mediumShipCounter--;
                         }
@@ -236,7 +239,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.mediumLeft:
                     if(largeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.HORIZONTAL_LEFT);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.HORIZONTAL_LEFT);
                         if(ship != null){
                             mediumShipCounter--;
                         }
@@ -247,7 +250,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.mediumBottom:
                     if(mediumShipCounter>0) {
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.VERTICAL_BOTTOM);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.VERTICAL_BOTTOM);
                         if(ship != null){
                             mediumShipCounter--;
                         }
@@ -257,7 +260,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     }
                     break;
                 case R.id.mediumRight: if(mediumShipCounter>0) {
-                    ship = myShipMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.HORIZONTAL_RIGHT);
+                    ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, ShipOrientation.HORIZONTAL_RIGHT);
                     if(ship != null){
                         mediumShipCounter--;
                     }
@@ -268,7 +271,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.mediumAuto:
                     if(mediumShipCounter>0) {
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.MEDIUM, null);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, null);
                         if(ship != null){
                             mediumShipCounter--;
                         }
@@ -279,7 +282,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.largeTop:
                     if(largeShipCounter>0) {
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.VERTICAL_TOP);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.VERTICAL_TOP);
                         if(ship != null){
                             largeShipCounter--;
                         }
@@ -290,7 +293,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.largeLeft:
                     if(largeShipCounter>0) {
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.HORIZONTAL_LEFT);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.HORIZONTAL_LEFT);
                         if(ship != null){
                             largeShipCounter--;
                         }
@@ -301,7 +304,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.largeBottom:
                     if(largeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.VERTICAL_BOTTOM);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.VERTICAL_BOTTOM);
                         if(ship != null){
                             largeShipCounter--;
                         }
@@ -312,7 +315,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.largeRight:
                     if(largeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.HORIZONTAL_RIGHT);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, ShipOrientation.HORIZONTAL_RIGHT);
                         if(ship != null){
                             largeShipCounter--;
                         }
@@ -323,7 +326,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.largeAuto:
                     if(largeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.LARGE, null);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, null);
                         if(ship != null){
                             largeShipCounter--;
                         }
@@ -334,7 +337,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.extraLargeTop:
                     if(extraLargeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.VERTICAL_TOP);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.VERTICAL_TOP);
                         if(ship != null){
                             extraLargeShipCounter--;
                         }
@@ -345,7 +348,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.extraLargeLeft:
                     if(extraLargeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.HORIZONTAL_LEFT);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.HORIZONTAL_LEFT);
                         if(ship != null){
                             extraLargeShipCounter--;
                         }
@@ -356,7 +359,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.extraLargeBottom:
                     if(extraLargeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.VERTICAL_BOTTOM);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.VERTICAL_BOTTOM);
                         if(ship != null){
                             extraLargeShipCounter--;
                         }
@@ -367,7 +370,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.extraLargeRight:
                     if(extraLargeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.HORIZONTAL_RIGHT);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, ShipOrientation.HORIZONTAL_RIGHT);
                         if(ship != null){
                             extraLargeShipCounter--;
                         }
@@ -378,7 +381,7 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     break;
                 case R.id.extraLargeAuto:
                     if(extraLargeShipCounter>0){
-                        ship = myShipMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, null);
+                        ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, null);
                         if(ship != null){
                             extraLargeShipCounter--;
                         }
@@ -397,9 +400,13 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
     }
 
     public void autoDisposition() {
+        Log.d("BOARD","Attivo autofill");
         iAmanager.fleetSetter(smallShipCounter, mediumShipCounter, largeShipCounter, extraLargeShipCounter);
+//        logicMatrix = iAmanager.getMyShipMatrix();
+        logicMatrix.print();
+
         smallShipCounter = mediumShipCounter = largeShipCounter = extraLargeShipCounter = 0;
-        for(Ship ship : myShipMatrix.getFleet()) {
+        for(Ship ship : logicMatrix.getFleet()) {
             showShip(ship);
         }
         updateViews();
@@ -407,12 +414,16 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
 
     //  Mostra la Box come Mancato
     public void setMiss(Box box) {
-        rows.get(Objects.requireNonNull(boxToIndex.get(box))[0]).setMiss(Objects.requireNonNull(boxToIndex.get(box))[1]);
+        Integer[] coord = boxToIndex.get(box);
+        rows.get(Objects.requireNonNull(coord)[0]+1).setMiss(Objects.requireNonNull(coord)[1]+1);
+        logicMatrix.setValue(coord[0],coord[1],MatrixStatus.MISS);
     }
 
     //  Mostra la Box come Colpito
     public void setHit(Box box) {
-        rows.get(Objects.requireNonNull(boxToIndex.get(box))[0]).setHit(Objects.requireNonNull(boxToIndex.get(box))[1]);
+        Integer[] coord = boxToIndex.get(box);
+        rows.get(Objects.requireNonNull(coord)[0]+1).setHit(Objects.requireNonNull(coord)[1]+1);
+        logicMatrix.setValue(coord[0],coord[1],MatrixStatus.HIT);
     }
 
     // Data una nave la mostra sulla Board
@@ -449,21 +460,117 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
         }
     }
 
-    public void setSank(Ship ship) {
+    public void setSank(Integer posX, Integer posY, Integer size, ShipOrientation orientation) {
+
+        Log.d("SETSANK",posX+","+posY+"-"+size+"---"+orientation);
+        switch(orientation){
+            //Nave da 1
+            case NONE:
+                Log.d("SETSANK","Nave da 1");
+                logicMatrix.setValue(posX, posY, MatrixStatus.SANK);
+                rows.get(posX+1).setMiss(posY+1);
+                break;
+            case VERTICAL_TOP:
+                for(int i=0; i<size ; i++){
+                    Log.d("SETSANK","i:"+i);
+                    logicMatrix.setValue(posX-i, posY, MatrixStatus.SANK);
+                    //se la cella contiene la "prua"
+                    if(i==0){
+                        rows.get(posX+1-i).getScvList().get(posY+1).setOrientation(BoxOrientation.BOTTOM_VERTICAL);
+                    }
+                    //se la cella contiene la "poppa"
+                    else if(i==size-1){
+                            rows.get(posX+1-i).getScvList().get(posY+1).setOrientation(BoxOrientation.TOP_VERTICAL);
+                    }
+                    else{
+                        rows.get(posX+1-i).getScvList().get(posY+1).setOrientation(BoxOrientation.MIDDLE_VERTICAL);
+                    }
+                }
+                break;
+            case VERTICAL_BOTTOM:
+                for(int i=0; i<size ; i++){
+                    Log.d("SETSANK","i:"+i);
+                    logicMatrix.setValue(posX+i, posY, MatrixStatus.SANK);
+                    //se la cella contiene la "prua"
+                    if(i==size-1){
+                        rows.get(posX+1+i).getScvList().get(posY+1).setOrientation(BoxOrientation.BOTTOM_VERTICAL);
+                    }
+                    //se la cella contiene la "poppa"
+                    else if(i==0){
+                        rows.get(posX+1+i).getScvList().get(posY+1).setOrientation(BoxOrientation.TOP_VERTICAL);
+                    }
+                    else{
+                        rows.get(posX+1+i).getScvList().get(posY+1).setOrientation(BoxOrientation.MIDDLE_VERTICAL);
+                    }
+                }
+                break;
+            case HORIZONTAL_LEFT:
+                for(int i=0; i<size ; i++){
+                    Log.d("SETSANK","i:"+i);
+                    logicMatrix.setValue(posX, posY-i, MatrixStatus.SANK);
+                    //se la cella contiene la "prua"
+                    if(i==0){
+                        rows.get(posX+1).getScvList().get(posY+1-i).setOrientation(BoxOrientation.LEFT_HORIZONTAL);
+                    }
+                    //se la cella contiene la "poppa"
+                    else if(i==size-1){
+                        rows.get(posX+1).getScvList().get(posY+1-i).setOrientation(BoxOrientation.RIGHT_HORIZONTAL);
+                    }
+                    else{
+                        rows.get(posX+1).getScvList().get(posY+1-i).setOrientation(BoxOrientation.MIDDLE_HORIZONTAL);
+                    }
+                }
+                break;
+            case HORIZONTAL_RIGHT:
+                for(int i=0; i<size ; i++){
+                    Log.d("SETSANK","i:"+i);
+                    logicMatrix.setValue(posX, posY+i, MatrixStatus.SANK);
+                    //se la cella contiene la "prua"
+                    if(i==size-1){
+                        rows.get(posX+1).getScvList().get(posY+1+i).setOrientation(BoxOrientation.LEFT_HORIZONTAL);
+                    }
+                    //se la cella contiene la "poppa"
+                    else if(i==0){
+                        rows.get(posX+1).getScvList().get(posY+1+i).setOrientation(BoxOrientation.RIGHT_HORIZONTAL);
+                    }
+                    else{
+                        rows.get(posX+1).getScvList().get(posY+1+i).setOrientation(BoxOrientation.MIDDLE_HORIZONTAL);
+                    }
+                }
+                break;
+        }
+
+        /*
+        Ship ship=null;
+        switch(size){
+            case 1:
+                ship = logicMatrix.addShip(posX, posY, ShipDimension.SMALL, orientation);
+                break;
+            case 2:
+                ship = logicMatrix.addShip(posX, posY, ShipDimension.MEDIUM, orientation);
+                break;
+            case 3:
+                ship = logicMatrix.addShip(posX, posY, ShipDimension.LARGE, orientation);
+                break;
+            case 4:
+                ship = logicMatrix.addShip(posX, posY, ShipDimension.EXTRA_LARGE, orientation);
+                break;
+        }
+
         if (ship!= null) {
-            BoxOrientation[] orientation;
+            BoxOrientation[] boxOrientation;
             switch (ship.getShipOrientation()) {
                 case VERTICAL_TOP:
-                    orientation = new BoxOrientation[]{BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.TOP_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.TOP_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
                     break;
                 case VERTICAL_BOTTOM:
-                    orientation = new BoxOrientation[]{BoxOrientation.TOP_VERTICAL, BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.TOP_VERTICAL, BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
                     break;
                 case HORIZONTAL_LEFT:
-                    orientation = new BoxOrientation[]{BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
                     break;
                 case HORIZONTAL_RIGHT:
-                    orientation = new BoxOrientation[]{BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
                     break;
                 case NONE:
                     rows.get(ship.getPosition().get(0)[0]+1).setVisibile(ship.getPosition().get(0)[1]+1, BoxOrientation.NONE);
@@ -472,22 +579,58 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
                     return;
             }
             Integer[] coord = ship.getPosition().get(0);
-            rows.get(coord[0]+1).setSank(coord[1]+1, orientation[0]);
+            rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[0]);
             coord = ship.getPosition().get(ship.getLenght()-1);
-            rows.get(coord[0]+1).setSank(coord[1]+1, orientation[1]);
+            rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[1]);
+
             for (int i = 1; i < ship.getLenght()-1; i++) {
                 coord = ship.getPosition().get(i);
-                rows.get(coord[0]+1).setSank(coord[1]+1, orientation[2]);
+                rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[2]);
+            }
+        }
+        */
+    }
+
+
+    public void setSank(Ship ship){
+        if (ship!= null) {
+            BoxOrientation[] boxOrientation;
+            switch (ship.getShipOrientation()) {
+                case VERTICAL_TOP:
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.TOP_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
+                    break;
+                case VERTICAL_BOTTOM:
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.TOP_VERTICAL, BoxOrientation.BOTTOM_VERTICAL, BoxOrientation.MIDDLE_VERTICAL};
+                    break;
+                case HORIZONTAL_LEFT:
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
+                    break;
+                case HORIZONTAL_RIGHT:
+                    boxOrientation = new BoxOrientation[]{BoxOrientation.RIGHT_HORIZONTAL, BoxOrientation.LEFT_HORIZONTAL, BoxOrientation.MIDDLE_HORIZONTAL};
+                    break;
+                case NONE:
+                    rows.get(ship.getPosition().get(0)[0]+1).setVisibile(ship.getPosition().get(0)[1]+1, BoxOrientation.NONE);
+                    return;
+                default:
+                    return;
+            }
+            Integer[] coord = ship.getPosition().get(0);
+            rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[0]);
+            coord = ship.getPosition().get(ship.getLenght()-1);
+            rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[1]);
+            for (int i = 1; i < ship.getLenght()-1; i++) {
+                coord = ship.getPosition().get(i);
+                rows.get(coord[0]+1).setSank(coord[1]+1, boxOrientation[2]);
             }
         }
     }
 
-    // Elimina una nave, se presente alle coorinate date
+    // Elimina una nave, se presente alle coordinate date
     public void deleteShip(int posX, int posY) {
-        Ship ship = myShipMatrix.removeShip(posX, posY);
+        Ship ship = logicMatrix.removeShip(posX, posY);
         if (ship != null) {
             for (Integer[] integers : ship.getPosition()) {
-                getBox(integers[0]+1,integers[1]+1).setStatusNone();
+                getBox(integers[0],integers[1]).setStatusNone();
             }
             switch(ship.getPosition().size()){
                 case 1:
@@ -549,43 +692,14 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
         this.setBackground(drawable);
     }
 
-
-//    private void checkBox(int posX, int posY) {
-//        Ship ship = enemyShipMatrix.findShipByElement(posX, posY);
-//        Box box = getBox(posX+1, posY+1);
-//        switch (enemyShipMatrix.getElement(posX, posY)) {
-//            case WATER:
-//                setMiss(box);
-//                break;
-//            case SHIP:
-//                setHit(box);
-//                ship.isHit(posX, posY);
-//                if (ship.isSink()) {
-//                    setSank(ship);
-//                }
-//                break;
-//        }
-//    }
-
-
-
     // Gestisce il click delle Box della board
     @Override
     public void onClick(View v) {
         Box box = (Box)v;
-        int posX = Objects.requireNonNull(boxToIndex.get(box))[0]-1;
-        int posY = Objects.requireNonNull(boxToIndex.get(box))[1]-1;
+        int posX = Objects.requireNonNull(boxToIndex.get(box))[0];
+        int posY = Objects.requireNonNull(boxToIndex.get(box))[1];
         if (deploy && !box.getStatus().equals(BoxStatus.SHIP_VISIBLE)) {
             new AddMenu(v, posX, posY).popupMenu.show();
-        }
-        if (!deploy) {
-//            checkBox(posX, posY);
-//            if (enemyShipMatrix.getElement(posX, posY).equals(MatrixStatus.WATER)) {
-//                setMiss(box);
-//            }
-//            else {
-//                setHit(box);
-//            }
         }
     }
 
@@ -593,14 +707,22 @@ public class Board extends CardView implements View.OnClickListener, View.OnLong
     @Override
     public boolean onLongClick(View v) {
         Box box = (Box)v;
-        int posX = Objects.requireNonNull(boxToIndex.get(box))[0]-1;
-        int posY = Objects.requireNonNull(boxToIndex.get(box))[1]-1;
+        int posX = Objects.requireNonNull(boxToIndex.get(box))[0];
+        int posY = Objects.requireNonNull(boxToIndex.get(box))[1];
         if (deploy) {
             deleteShip(posX, posY);
-            Log.d("TAG", String.valueOf(myShipMatrix.getFleet().size()));
+            Log.d("TAG", String.valueOf(logicMatrix.getFleet().size()));
         }
         return false;
     }
 
+    public HashMap getBoxIndex(){
+        return boxToIndex;
+    }
 
+    public void setClickListener(OnClickListener listener){
+        for(Row row:rows.subList(1, rows.size())){
+            row.setClickListener(listener, null);
+        }
+    }
 }

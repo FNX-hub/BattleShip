@@ -25,8 +25,10 @@ public class IAmanager {
         this.QIlevel = lv;
         this.DFAstate = 0;
         this.myLastMove = new Integer[2];
+        this.myLastUsefulMove = new Integer[2];
         this.name = name;
         this.myShipMatrix = new ShipMatrix(dim);
+        this.myRadar = new ShipMatrix(dim);
     }
 
     public ShipMatrix getMyShipMatrix(){
@@ -142,21 +144,20 @@ public class IAmanager {
             hitShip.isHit(enemyMove[0], enemyMove[1]);
 
             //controlla se è affondata
-            if (hitShip.isSink()) {
-                /*
-                List<Integer[]> occupiedCells = hitShip.getPosition();
-                for(int i = 0; i< hitShip.getLenght() ; i++){
-                    Integer[] cell = occupiedCells.get(i);
-                    myMatrix.setValue(enemyMove[0],enemyMove[1],MatrixStatus.SANK);
-                    myResponse.append("(").append(cell[0]).append("-").append(cell[1]).append(")");
-                }
-                */
+            if (hitShip.isSank()) {
                 int len = hitShip.getLenght();
                 Integer[] shipHead = hitShip.getStart();
                 ShipOrientation orientation = hitShip.getShipOrientation();
                 myResponse.append("sank").append("(").append(shipHead[0]).append(",").append(shipHead[1]).append(")").append("-").append(len).append("-").append(orientation);
+
+                for( Integer[] integers: hitShip.getPosition() ){
+                    myShipMatrix.setValue(integers[0], integers[1],MatrixStatus.SANK);
+                }
+
+
             } else {
                 myResponse.append("hit");
+                myShipMatrix.setValue(enemyMove[0], enemyMove[1], MatrixStatus.HIT);
             }
         }
 
@@ -166,29 +167,31 @@ public class IAmanager {
             myResponse.append("miss");
         }
 
+        Log.d("IA",myResponse.toString());
+        myShipMatrix.print();
         return myResponse.toString();
     }
 
     //sceglie la prossima mossa da fare
     //NB per ottimizzare il codice sia IA lv1 che IA lv2 sono implementate qui
     public Integer[] moveSelector() {
-        Integer[] mossa = new Integer[2];
+        Integer[] move = new Integer[2];
         if (DFAstate == 0) {
             //seleziona randomicamente una mossa - continua a selezionare finchè non esce una mossa valida
             boolean isValid = false;
             do {
                 Random random = new Random();
                 Integer dimMat = myRadar.getMatDim();
-                mossa[0] = random.nextInt(dimMat);
-                mossa[1] = random.nextInt(dimMat);
+                move[0] = random.nextInt(dimMat);
+                move[1] = random.nextInt(dimMat);
 
-                MatrixStatus statusCella = myRadar.getElement(mossa[0], mossa[1]);
+                MatrixStatus statusCella = myRadar.getElement(move[0], move[1]);
 
                 //controlla se è una mossa valida OVVERO se stai per sparare in una zona che non hai mai colpito
                 if (statusCella.equals(MatrixStatus.NONE)) {
                     isValid = true;
                 } else {
-                    Log.d("TESTING-IA", "la cella (" + mossa[0].toString() + "," + mossa[1].toString() + ") NON è un bersaglio valido");
+                    Log.d("IA", "la cella (" + move[0].toString() + "," + move[1].toString() + ") NON è un bersaglio valido");
                 }
 
             } while (!isValid);
@@ -197,74 +200,60 @@ public class IAmanager {
             //sei a conoscenza di una zona contenente una nave non ancora affondata, spara nei dintorni.
             Boolean isValid = false;
             do {
-
-                MatrixStatus StatusCell1 = myRadar.getElement(mossa[0], mossa[1]);
-                MatrixStatus StatusCell2 = myRadar.getElement(mossa[0], mossa[1]);
-                MatrixStatus StatusCell3 = myRadar.getElement(mossa[0], mossa[1]);
-                MatrixStatus StatusCell4 = myRadar.getElement(mossa[0], mossa[1]);
                 Random random = new Random();
                 //controlla se almeno uno dei 4 punti nelle immediate vicinanze è fattibile ALTRIMENTI spara nei dintorni
-                if (StatusCell1.equals(MatrixStatus.NONE) || StatusCell2.equals(MatrixStatus.NONE) || StatusCell3.equals(MatrixStatus.NONE) || StatusCell4.equals(MatrixStatus.NONE)) {
-                    int myChoice = random.nextInt(4);
+                    int myChoice = random.nextInt(8);
                     switch (myChoice) {
                         case 0:
-                            mossa[0] = myLastUsefulMove[0];
-                            mossa[1] = myLastUsefulMove[1] - 1;
+                            move[0] = myLastUsefulMove[0];
+                            move[1] = myLastUsefulMove[1] - 1;
                             break;
                         case 1:
-                            mossa[0] = myLastUsefulMove[0];
-                            mossa[1] = myLastUsefulMove[1] + 1;
+                            move[0] = myLastUsefulMove[0];
+                            move[1] = myLastUsefulMove[1] + 1;
                             break;
                         case 2:
-                            mossa[0] = myLastUsefulMove[0] - 1;
-                            mossa[1] = myLastUsefulMove[1];
+                            move[0] = myLastUsefulMove[0] - 1;
+                            move[1] = myLastUsefulMove[1];
                             break;
                         case 3:
-                            mossa[0] = myLastUsefulMove[0] + 1;
-                            mossa[1] = myLastUsefulMove[1];
+                            move[0] = myLastUsefulMove[0] + 1;
+                            move[1] = myLastUsefulMove[1];
+                            break;
+                        case 4:
+                            move[0] = myLastUsefulMove[0];
+                            move[1] = myLastUsefulMove[1] - 2;
+                            break;
+                        case 5:
+                            move[0] = myLastUsefulMove[0];
+                            move[1] = myLastUsefulMove[1] + 2;
+                            break;
+                        case 6:
+                            move[0] = myLastUsefulMove[0] - 2;
+                            move[1] = myLastUsefulMove[1];
+                            break;
+                        case 7:
+                            move[0] = myLastUsefulMove[0] + 2;
+                            move[1] = myLastUsefulMove[1];
                             break;
                         default:
-                            Log.d("TESTING-IA", "Errore nella scelta random - colpo nei dintorni");
+                            move[0] = random.nextInt(10);
+                            move[1] = random.nextInt(10);
+                            Log.d("IA", "Errore nella scelta random - colpo nei dintorni");
                     }
-                }
-                //spara nei dintorni
-                else {
-                    int myChoice = random.nextInt(4);
-                    switch (myChoice) {
-                        case 0:
-                            mossa[0] = myLastUsefulMove[0];
-                            mossa[1] = myLastUsefulMove[1] - 2;
-                            break;
-                        case 1:
-                            mossa[0] = myLastUsefulMove[0];
-                            mossa[1] = myLastUsefulMove[1] + 2;
-                            break;
-                        case 2:
-                            mossa[0] = myLastUsefulMove[0] - 2;
-                            mossa[1] = myLastUsefulMove[1];
-                            break;
-                        case 3:
-                            mossa[0] = myLastUsefulMove[0] + 2;
-                            mossa[1] = myLastUsefulMove[1];
-                            break;
-                        default:
-                            Log.d("TESTING-IA", "Errore nella scelta random - colpo nei dintorni");
-                    }
-                }
-
                 //controlla se è una mossa valida OVVERO se stai per sparare in una zona che non hai mai colpito
-                MatrixStatus statusCell = myRadar.getElement(mossa[0], mossa[1]);
+                MatrixStatus statusCell = myRadar.getElement(move[0], move[1]);
                 if (statusCell.equals(MatrixStatus.NONE)) {
                     isValid = true;
                 } else {
-                    Log.d("TESTING-IA", "la cella (" + mossa[0] + "," + mossa[1] + ") NON è un bersaglio valido");
+                    Log.d("IA", "la cella (" + move[0] + "," + move[1] + ") NON è un bersaglio valido");
                 }
             } while (!isValid);
         }
-        Log.d("TESTING-IA", "IA (lv " + this.QIlevel + ") sceglie di colpire la cella (" + mossa[0] + "," + mossa[1] + ")");
-        myLastMove[0] = mossa[0];
-        myLastMove[1] = mossa[1];
-        return mossa;
+        Log.d("IA", "IA (lv " + this.QIlevel + ") sceglie di colpire la cella (" + move[0] + "," + move[1] + ")");
+        myLastMove[0] = move[0];
+        myLastMove[1] = move[1];
+        return move;
     }
 
     //modifica lo stato della DFA in base all'esito della tua ultima mossa & aggiorna il tuo radar di conseguenza
@@ -273,7 +262,7 @@ public class IAmanager {
         //NB un giocatore NON ha alcun accesso alla matrice dell'avversario.
         //l'unico modo che ha per conoscere l'esito dei suoi attacchi è quello di chiedere all'avversario.
 
-        Log.d("TESTING-IA", "Ultima mossa fatta: (" + myLastMove[0] + "," + myLastMove[1] + ")\n");
+        Log.d("IA", "Ultima mossa fatta: (" + myLastMove[0] + "," + myLastMove[1] + ")\n");
 
         //nella tua ultima mossa hai mancato
         if (result.equals("miss") && this.QIlevel > 1) {
@@ -312,8 +301,9 @@ public class IAmanager {
             //N.B: siamo nel formato (X,Y) dove X e Y sono numeri compresi tra 0 e 9 - dato che la matrice è 10x10
             //TODO per eventuali altri formati si crea un if differente (per ora non è strettamente richiesto dalle specifiche)
             if (result.charAt(4) == '(' && result.charAt(6) == ',' && result.charAt(8) == ')') {
-                startPos[0] = (int) result.charAt(5);
-                startPos[1] = (int) result.charAt(7);
+                startPos[0] = Integer.valueOf(result.substring(5, 6));
+                startPos[1] = Integer.valueOf(result.substring(7, 8));
+
             }
             //Ottieni la lunghezza della nave
             if (result.contains("-1-")) {
@@ -329,22 +319,29 @@ public class IAmanager {
                 sankShipLen = 4;
             }
             //Marca le celle del radar come "sank" in base all'Orientation della nave
-            for (int i = 0; i < sankShipLen; i++) {
+
                 //
                 if (result.contains("VERTICAL_TOP")) {
-                    //myRadar.setValue(myLastMove[0],myLastMove[1],MatrixStatus.SANK);
-                    myRadar.setValue(startPos[0] - i, startPos[1], MatrixStatus.SANK);
+
+                    for(int i=0 ; i<sankShipLen ; i++){
+                        myRadar.setValue(startPos[0] - i, startPos[1], MatrixStatus.SANK);
+                    }
                 }
                 if (result.contains("VERTICAL_BOTTOM")) {
-                    myRadar.setValue(startPos[0] + i, startPos[1], MatrixStatus.SANK);
+                    for(int i=0 ; i<sankShipLen ; i++){
+                        myRadar.setValue(startPos[0] + i, startPos[1], MatrixStatus.SANK);
+                    }
                 }
                 if (result.contains("HORIZONTAL_LEFT")) {
-                    myRadar.setValue(startPos[0], startPos[1] - i, MatrixStatus.SANK);
+                    for(int i=0 ; i<sankShipLen ; i++) {
+                        myRadar.setValue(startPos[0], startPos[1] - i, MatrixStatus.SANK);
+                    }
                 }
                 if (result.contains("HORIZONTAL_RIGHT")) {
-                    myRadar.setValue(startPos[0], startPos[1] + i, MatrixStatus.SANK);
+                    for(int i=0 ; i<sankShipLen ; i++){
+                        myRadar.setValue(startPos[0], startPos[1] + i, MatrixStatus.SANK);
+                    }
                 }
-            }
         }
     }
 }
